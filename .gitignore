@@ -1,0 +1,30 @@
+# CLion specific files
+.idea/
+
+# Build outputs from CLion's default build locations
+cmake-build-debug/
+cmake-build-release/
+
+# Generated files and build artifacts
+*.o          # Object files
+*.so         # Shared libraries
+*.a          # Static libraries
+*.exe        # Executables (Windows)
+*.out        # Executables (Unix/Linux)
+*.d          # Dependency files
+*.i          # Preprocessed source files
+*.s          # Assembly output
+*.pch        # Precompiled headers
+*.pdb        # Program Database files (Windows Debugger)
+
+# Log and cache files
+*.log        # Log files
+*.tmp        # Temporary files
+*.swp        # Vim swap files
+
+# CLion and other IDE module files
+*.iml        # IntelliJ Module files
+
+# Backup files
+*.bak        # Backup files
+*.~          # Backup files with tilde (~) at the end
