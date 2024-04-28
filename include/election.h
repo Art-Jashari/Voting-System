@@ -24,7 +24,7 @@ typedef struct candidate{
     int cid;
     char cname[20];
     int votes;
-}CANDIDATE;
+} CANDIDATE;
 
 
 
@@ -44,10 +44,68 @@ char studentVotes[200]; // Stores the information of the votes submited by each 
 // FUNCTIONS -----------------------------------------------------------------------------
 
 
-void adminPanel(){}
+int extractYear(char userID[15]){
+    int year = 0;
+    char tmp;
+    for (int i = 0; i < 4; ++i) {
+        tmp = userID[i];
+        year = (year * 10) + (tmp - 48);
+    }
+    return year;
+}
+
+
 void studentPanel(){}
 
-int authenticateAdmin(){}
+int authenticateAdmin(){
+    char username[15], password[6];
+
+    printf("\nEnter username: ");
+    scanf("%s",username);
+    if((strcmp(username,"Admin"))!=0)
+        return 0;
+    else {
+        printf("Enter Password: ");
+        int i = 0;
+        for(i = 0; i < 5 ; i++) {
+            password[i]=getch();
+            printf("%c",'*');
+        }
+        password[i]='\0';
+        if((strcmp(password,"admiN"))!=0)
+            return 0;
+    }
+    return 1;
+}
+
+void adminPanel(){
+    while (1) {
+        if (authenticateAdmin() != 1) {
+            printf("\n Wrong username or Password. \n");
+            break;
+        }
+    }
+
+    while (1) {
+        char inputID[15];
+        char input;
+        char banInp;
+        int WinnerCid;
+        int totalVotedNow = 0;
+        printf("\n1. New Election"
+               "\n2. Continue Previous Election"
+               "\n3. Delete Illegal Vote"
+               "\n4. Ban User IDs\n5. Result\n6. Log Out\n\n Option: ");
+        scanf("%c", &input);
+
+        switch (input) {
+            // Logic to implement the options and methods for the admin.
+        }
+
+    }
+}
+
+
 int checkBranchCode(){  // Will check whether the inputed branch code is matching with the global branch code.
 
 }
