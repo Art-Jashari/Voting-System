@@ -60,6 +60,9 @@ void studentPanel(){}
 int authenticateAdmin(){
     char username[15], password[6];
 
+    // Admin username: Admin
+    // Admin password: admiN
+
     printf("\nEnter username: ");
     scanf("%s",username);
     if((strcmp(username,"Admin"))!=0)
@@ -114,7 +117,29 @@ void banID(){}
 void saveVote(){}
 void deleteIllegalVote(){}
 
-void initiateNewElection(){}
+void initiateNewElection(){
+    printf("\nNew Election Initiation:\n");
+    printf("\nElections for which year: ");
+    scanf("d", &currentValidId.year);
+    printf("\nEnter branch code: ");
+    scanf("%s", currentValidId.branch);
+    printf("\nMax roll no.:");
+    scanf("%d", &currentValidId.totalVoters);
+    printf("\nEnter the no. of candidates:");
+    scanf("%d", &numberOfCandidates);
+
+    for (int i = 0; i < currentValidId.totalVoters; i++) {
+        studentVotes[i] = '0';
+    }
+
+    for (int i = 0; i < numberOfCandidates; i++) {
+        candidateArray[i].cid = i + 1;
+        printf("\nEnter name of candidate %d: ", i + 1);
+        scanf("%s", candidateArray[i].cname);
+        candidateArray[i].votes = 0;
+    }
+}
+
 int getWinner(){}
 int extractRollNum(){}
 
