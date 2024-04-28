@@ -40,10 +40,12 @@ char studentVotes[200]; // Stores the information of the votes submited by each 
 
 
 
-// Here, the functions to handle the system's possible actions will be added.
+
 // FUNCTIONS -----------------------------------------------------------------------------
+// Here, the functions to handle the system's possible actions will be added.
 
 
+//This extracts the year from the userID -- For example, userID:2018btecs00064 year:2024
 int extractYear(char userID[15]){
     int year = 0;
     char tmp;
@@ -54,8 +56,28 @@ int extractYear(char userID[15]){
     return year;
 }
 
+int extractRollNo(char userID[15]) {
+    int rollNo = 0;
+    char tmp;
+    for (int i = 0; i < 14; i++) {
+        tmp = userID[i];
+        rollNo = (rollNo * 10) + (tmp - 48);
+    }
+    return rollNo;
+}
 
-void studentPanel(){}
+// This checks whether the inputed branch code is matching with the global branch code or not.
+int checkBranchCode(char userID[15]) {
+    char branchCode[6];
+    for (int i = 4; i < 9; i++) {
+        branchCode[i-4] = userID[i];
+    }
+    branchCode[5] = '\0';
+    if(strcmp(branchCode, currentValidId.branch) == 0)
+        return 1;
+    else
+        return 0;
+}
 
 int authenticateAdmin(){
     char username[15], password[6];
@@ -80,6 +102,49 @@ int authenticateAdmin(){
     }
     return 1;
 }
+
+void banID() {
+    printf("\nCreating Banned.txt...\n");
+    FILE *fp = fopen("Banned.txt", "w");
+    if (fp == NULL) {
+        printf("Error: Banned.txt was not created.");
+        fclose(fp);
+        return;
+    }
+
+    printf("Enter the last roll number to ban\nPress 0 to exit...");
+    int input;
+    while (1) {
+        printf("\nEnter Number: ");
+        scanf("%d", &input);
+        if (input == 0)
+            break;
+        studentVotes[input - 1] = '$';
+        fprintf(fp, "%d\n", input);
+    }
+
+    fclose(fp);
+    printf("\nBanned.txt created successfully.\n");
+}
+
+void createCandidateFiles(){
+    printf("\nCreating candidate files...\n");
+    FILE *fp;
+    char filename[20];
+    for (int i = 0; i <= numberOfCandidates; i++) {
+        sprintf(filename, "Candidate%d.txt", i);
+        fp = fopen(filename, "w");
+        fprintf(fp, "0\n%s", candidateArray[i-1].cname);
+        fclose(fp);
+    }
+    printf("\nCreated files successfully.\n");
+}
+
+void deleteIllegalVote(){}
+
+void studentPanel(){}
+
+
 
 void adminPanel(){
     while (1) {
@@ -109,13 +174,11 @@ void adminPanel(){
 }
 
 
-int checkBranchCode(){  // Will check whether the inputed branch code is matching with the global branch code.
 
-}
 void banID(){}
 
 void saveVote(){}
-void deleteIllegalVote(){}
+
 
 void initiateNewElection(){
     printf("\nNew Election Initiation:\n");
@@ -142,10 +205,6 @@ void initiateNewElection(){
 
 int getWinner(){}
 int extractRollNum(){}
-
-void createCandidateFiles(){}
-
-
 
 // ---------------------------------------------------------------------------------------
 
