@@ -5,28 +5,22 @@
 // Here is where that logic will run.
 
 int main() {
-    char input;
-
+    int choice;
     while (1) {
-
-        printf("\n\t\t\t   1.Student panel \n\t\t\t   2.Admin panel \n\t\t\t   3.Exit \n\t\t\t   Option:");
-        scanf("%c", &input);
-
-        switch (input) {
-            case '1':
-                studentPanel();
-                break;
-            case '2':
+        printf("\n1. Admin Panel\n2. Student Panel\n3. Exit\nChoice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
                 adminPanel();
                 break;
-            case '3':
-                return 0;
+            case 2:
+                studentPanel();
+                break;
+            case 3:
+                exit(0);
             default:
-                printf("\nInvalid option");
-                getch();
-
+                printf("Invalid Choice\n");
         }
-    };
-
+    }
     return 0;
 }
